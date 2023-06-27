@@ -42,7 +42,7 @@ pub async fn spawn(proj: &Arc<Project>) -> JoinHandle<()> {
 
         if TcpStream::connect(&reload_addr).await.is_ok() {
             log::error!(
-                    "Reload TCP port {reload_addr} already in use. You can set the port in the server integration's RenderOptions reload_port"
+                    "Reload TCP port {reload_addr} already in use. You can set the port and IP in the server integration's RenderOptions reload_port and reload_ip"
                 );
             Interrupt::request_shutdown().await;
 

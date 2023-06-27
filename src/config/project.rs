@@ -10,7 +10,7 @@ use crate::{
 use camino::{Utf8Path, Utf8PathBuf};
 use cargo_metadata::{Metadata, Package};
 use serde::Deserialize;
-use std::{fmt::Debug, net::SocketAddr, sync::Arc};
+use std::{fmt::Debug, net::{SocketAddr, IpAddr}, sync::Arc};
 
 use super::{
     assets::AssetsConfig,
@@ -113,6 +113,7 @@ impl Project {
             ("LEPTOS_SITE_PKG_DIR", self.site.pkg_dir.to_string()),
             ("LEPTOS_SITE_ADDR", self.site.addr.to_string()),
             ("LEPTOS_RELOAD_PORT", self.site.reload.port().to_string()),
+            ("LEPTOS_RELOAD_IP", self.site.reload.ip().to_string()),
             ("LEPTOS_LIB_DIR", self.lib.rel_dir.to_string()),
             ("LEPTOS_BIN_DIR", self.bin.rel_dir.to_string()),
         ];
@@ -143,6 +144,8 @@ pub struct ProjectConfig {
     pub js_dir: Option<Utf8PathBuf>,
     #[serde(default = "default_reload_port")]
     pub reload_port: u16,
+    #[serde(default = "default_reload_ip")]
+    pub reload_ip: IpAddr,
     /// command for launching end-2-end integration tests
     pub end2end_cmd: Option<String>,
     /// the dir used when launching end-2-end integration tests
@@ -187,9 +190,9 @@ impl ProjectConfig {
                 conf.site_root
             );
         }
-        if conf.site_addr.port() == conf.reload_port {
+        if conf.site_addr.ip() == conf.reload_ip && conf.site_addr.port() == conf.reload_port {
             bail!(
-                "The site-addr port and reload-port cannot be the same: {}",
+                "The site-addr port and reload-port cannot be the same if their IP matches: {}",
                 conf.reload_port
             );
         }
@@ -286,6 +289,10 @@ fn default_site_root() -> Utf8PathBuf {
 
 fn default_reload_port() -> u16 {
     3001
+}
+
+fn default_reload_ip() -> IpAddr {
+    [127, 0, 0, 1].into()
 }
 
 fn default_browserquery() -> String {

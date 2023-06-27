@@ -44,6 +44,7 @@ fn test_project_dev() {
     LEPTOS_SITE_PKG_DIR=pkg \
     LEPTOS_SITE_ADDR=127.0.0.1:3000 \
     LEPTOS_RELOAD_PORT=3001 \
+    LEPTOS_RELOAD_IP=127.0.0.1 \
     LEPTOS_LIB_DIR=. \
     LEPTOS_BIN_DIR=. \
     LEPTOS_WATCH=ON";
@@ -82,6 +83,7 @@ fn test_workspace_project1() {
     LEPTOS_SITE_PKG_DIR=pkg \
     LEPTOS_SITE_ADDR=127.0.0.1:3000 \
     LEPTOS_RELOAD_PORT=3001 \
+    LEPTOS_RELOAD_IP=127.0.0.1 \
     LEPTOS_LIB_DIR=project1\\front \
     LEPTOS_BIN_DIR=project1\\server \
     LEPTOS_WATCH=ON"
@@ -92,6 +94,7 @@ fn test_workspace_project1() {
     LEPTOS_SITE_PKG_DIR=pkg \
     LEPTOS_SITE_ADDR=127.0.0.1:3000 \
     LEPTOS_RELOAD_PORT=3001 \
+    LEPTOS_RELOAD_IP=127.0.0.1 \
     LEPTOS_LIB_DIR=project1/front \
     LEPTOS_BIN_DIR=project1/server \
     LEPTOS_WATCH=ON"

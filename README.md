@@ -256,6 +256,11 @@ site-addr = "127.0.0.1:3000"
 # Optional, defaults 3001. Env: LEPTOS_RELOAD_PORT
 reload-port = 3001
 
+# The IP used by the reload server (only used in watch mode).
+#
+# Optional, defaults to 127.0.0.1. Env: LEPTOS_RELOAD_IP
+reload-ip = "127.0.0.1"
+
 # The command used for running end-to-end tests. See the section about End-to-end testing.
 #
 # Optional. Env: LEPTOS_END2END_CMD.
@@ -280,6 +285,7 @@ Echoed from the Leptos config:
 - LEPTOS_SITE_PKG_DIR
 - LEPTOS_SITE_ADDR
 - LEPTOS_RELOAD_PORT
+- LEPTOS_RELOAD_IP
 
 Directories used when building:
 

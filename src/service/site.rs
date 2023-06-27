@@ -97,8 +97,7 @@ impl fmt::Debug for Site {
 
 impl Site {
     pub fn new(config: &ProjectConfig) -> Self {
-        let mut reload = config.site_addr;
-        reload.set_port(config.reload_port);
+        let reload = SocketAddr::new(config.reload_ip, config.reload_port);
         Self {
             addr: config.site_addr,
             reload,
